@@ -3,5 +3,18 @@
     <color name="colorPrimary">#0a1016</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#25e277</color>
+
+    <color name="greenPressed">#c725e277</color>
+
+    <color name="background">#282c30</color>
     <color name="gray">#222333</color>
+    <color name="grayLight">#3b4045</color>
+
+    <color name="purple">#741fda</color>
+    <color name="purplePressed">#c8741fda</color>
+
+    <color name="gradientStart">#161e2d</color>
+    <color name="gradientEnd">#152924</color>
+
+    <color name="whiteTransparent">#24ffffff</color>
 </resources>

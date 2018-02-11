@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">GimmeMovie</string>
+    <string name="app_name">Gimme Movie</string>
+
+    <string name="roulette_selector_card_find_something_to_watch">Find something to watch:</string>
+    <string name="roulette_selector_card_imdb">IMDB</string>
+    <string name="roulette_selector_card_type">Type</string>
+    <string name="roulette_selector_card_tv_shows">TV Shows</string>
+    <string name="roulette_selector_card_movies">Movies</string>
+    <string name="roulette_button_spin">Spin</string>
+    <string name="roulette_init_result_text">Click <b>Spin</b> to run the roulette!</string>
+
+    <string-array name="imdb_ratings">
+        <item>Any Score</item>
+        <item>>5</item>
+        <item>>6</item>
+        <item>>7</item>
+        <item>>8</item>
+        <item>>9</item>
+    </string-array>
 </resources>

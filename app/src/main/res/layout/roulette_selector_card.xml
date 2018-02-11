@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/textViewFindSth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/roulette_selector_card_find_something_to_watch"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top"/>
+
+        <View
+            android:id="@+id/viewDividerOne"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/grayLight"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFindSth"/>
+
+        <TextView
+            android:id="@+id/textViewImdb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roulette_selector_card_imdb"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerImdbRating"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toTopOf="@+id/spinnerImdbRating"/>
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/spinnerImdbRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/white"
+            android:minWidth="100dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+            app:layout_constraintTop_toBottomOf="@+id/viewDividerOne"
+            app:ms_arrow_tint="@android:color/white"
+            app:ms_background_color="@color/gray"
+            app:ms_text_color="@android:color/white"/>
+
+        <View
+            android:id="@+id/viewDividerTwo"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/grayLight"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerImdbRating"/>
+
+        <TextView
+            android:id="@+id/textViewType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roulette_selector_card_type"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/checkBoxMovies"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toTopOf="@+id/checkBoxMovies"/>
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_vertical_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_vertical_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_horizontal_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp"/>
+
+        <CheckBox
+            android:id="@+id/checkBoxTvShows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:text="@string/roulette_selector_card_tv_shows"
+            android:textColor="@android:color/white"
+            android:theme="@style/AppTheme.CheckBoxStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+            app:layout_constraintTop_toBottomOf="@+id/viewDividerTwo"/>
+
+        <CheckBox
+            android:id="@+id/checkBoxMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:checked="true"
+            android:text="@string/roulette_selector_card_movies"
+            android:textColor="@android:color/white"
+            android:theme="@style/AppTheme.CheckBoxStyle"
+            app:layout_constraintBottom_toBottomOf="@+id/checkBoxTvShows"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxTvShows"
+            app:layout_constraintTop_toTopOf="@+id/checkBoxTvShows"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
