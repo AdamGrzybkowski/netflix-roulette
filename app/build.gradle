@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.adamg.gimmemovie"
+        applicationId "com.adamg.netflixroulette"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1

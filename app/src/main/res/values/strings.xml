@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gimme Movie</string>
+    <string name="app_name">Netflix Roulette</string>
 
     <string name="roulette_selector_card_find_something_to_watch">Find something to watch:</string>
     <string name="roulette_selector_card_imdb">IMDB</string>
