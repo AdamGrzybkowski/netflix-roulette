@@ -3,6 +3,7 @@ package com.adamg.gimmemovie
 import android.app.Activity
 import android.app.Application
 import com.adamg.gimmemovie.dagger.components.DaggerApplicationComponent
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber
@@ -14,12 +15,24 @@ class GimmeMovieApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        initLeakCanary()
+        initDagger()
+        setupTimber()
+    }
+
+    private fun initLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
+    }
+
+    private fun initDagger() {
         DaggerApplicationComponent
                 .builder()
                 .application(this)
                 .build()
                 .inject(this)
-        setupTimber()
     }
 
     private fun setupTimber() {
