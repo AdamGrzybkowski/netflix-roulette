@@ -33,6 +33,7 @@ dependencies {
     ext.rxJavaVersion = '2.1.7'
     ext.timberVersion = '4.6.0'
     ext.leakCanaryVersion = '1.5.4'
+    ext.ankoVersion = "0.10.4"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -51,7 +52,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation"com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0"
-    implementation "org.jetbrains.anko:anko-commons:0.10.4"
+    implementation "org.jetbrains.anko:anko-commons:$ankoVersion"
+    implementation "org.jetbrains.anko:anko-design:$ankoVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.jaredrummler:material-spinner:1.2.4"
     implementation "com.squareup.picasso:picasso:2.5.2"

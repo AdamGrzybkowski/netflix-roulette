@@ -14,12 +14,14 @@ import com.adamg.netflixroulette.util.extensions.hideGroup
 import com.adamg.netflixroulette.util.extensions.show
 import com.adamg.netflixroulette.util.extensions.showGroup
 import com.adamg.netflixroulette.view.base.BaseActivity
+import com.adamg.netflixroulette.view.base.Result
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_roulette.*
 import kotlinx.android.synthetic.main.roulette_content.*
 import kotlinx.android.synthetic.main.roulette_result_card.*
 import kotlinx.android.synthetic.main.roulette_selector_card.*
 import org.jetbrains.anko.browse
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.dip
 import javax.inject.Inject
 
@@ -35,27 +37,43 @@ class RouletteActivity: BaseActivity() {
         setContentView(R.layout.activity_roulette)
         setSupportActionBar(toolbar)
         setupImdbRatingSpinner()
+        setupListeners()
 
         viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(RouletteViewModel::class.java)
 
-        buttonSpinRoulette.setOnClickListener {
-            viewModel.getRandomShow(getRouletteFilter())
-            progressBarResult.show()
-            textViewInitResult.hide()
-            buttonWatch.hide()
-            groupResult.hideGroup()
-        }
-
-        viewModel.getViewState().observe(this, Observer { show ->
-            show?.let {
-                progressBarResult.hide()
-                displayShow(it)
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+        viewModel.getViewState().observe(this, Observer { viewState ->
+            when (viewState) {
+                is Result.Loading -> handleLoading()
+                is Result.Failure -> handleError(viewState.message)
+                is Result.Success -> handleSuccess(viewState.data)
             }
         })
 
+    }
+
+    private fun setupListeners() {
+        buttonSpinRoulette.setOnClickListener { viewModel.getRandomShow(getRouletteFilter()) }
+    }
+
+    private fun handleLoading() {
+        progressBarResult.show()
+        buttonSpinRoulette.text = getString(R.string.roulette_button_spinning)
+        textViewInitResult.hide()
+        buttonWatch.hide()
+        groupResult.hideGroup()
+    }
+
+    private fun handleError(errorMessage: String?) {
+        snackbar(constraintLayoutRouletteContainer, errorMessage ?: getString(R.string.unknown_error))
+    }
+
+    private fun handleSuccess(show: Show) {
+        progressBarResult.hide()
+        buttonSpinRoulette.text = getString(R.string.roulette_button_spin_again)
+        displayShow(show)
+        scrollView.fullScroll(ScrollView.FOCUS_DOWN)
     }
 
     private fun getRouletteFilter(): RouletteFilter {
