@@ -8,6 +8,10 @@
     <string name="roulette_selector_card_movies">Movies</string>
     <string name="roulette_button_spin">Spin</string>
     <string name="roulette_init_result_text">Click <b>Spin</b> to run the roulette!</string>
+    <string name="roulette_result_watch">Watch</string>
+    <string name="roulette_result_more_info">More info</string>
+    <string name="roulette_result_imdb_rating">IMDB: %s/10</string>
+    <string name="roulette_result_seasons">%d Seasons</string>
 
     <string-array name="imdb_ratings">
         <item>Any Score</item>

@@ -1,11 +1,14 @@
 package com.adamg.gimmemovie.view.roulette
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.widget.ScrollView
 import com.adamg.gimmemovie.R
+import com.adamg.gimmemovie.repository.model.RouletteFilter
+import com.adamg.gimmemovie.repository.model.Show
+import com.adamg.gimmemovie.repository.model.ShowKind
 import com.adamg.gimmemovie.util.extensions.hide
 import com.adamg.gimmemovie.util.extensions.hideGroup
 import com.adamg.gimmemovie.util.extensions.show
@@ -16,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_roulette.*
 import kotlinx.android.synthetic.main.roulette_content.*
 import kotlinx.android.synthetic.main.roulette_result_card.*
 import kotlinx.android.synthetic.main.roulette_selector_card.*
+import org.jetbrains.anko.browse
 import org.jetbrains.anko.dip
 import javax.inject.Inject
 
@@ -36,22 +40,74 @@ class RouletteActivity: BaseActivity() {
                 .of(this, viewModelFactory)
                 .get(RouletteViewModel::class.java)
 
-        //mocked loading content behavior
         buttonSpinRoulette.setOnClickListener {
+            viewModel.getRandomShow(getRouletteFilter())
             progressBarResult.show()
             textViewInitResult.hide()
+            buttonWatch.hide()
             groupResult.hideGroup()
-            Handler().postDelayed({
-                progressBarResult.hide()
-                groupResult.showGroup()
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-            }, 2000)
         }
 
-        //temporary to see the UI
-        Picasso.with(this)
-                .load("https://img.reelgood.com/content/movie/ee6a5582-6f7a-4c21-a907-6df3c1713329/poster-780.jpg")
-                .into(imageViewPoster)
+        viewModel.getViewState().observe(this, Observer { show ->
+            show?.let {
+                progressBarResult.hide()
+                displayShow(it)
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+            }
+        })
+
+    }
+
+    private fun getRouletteFilter(): RouletteFilter {
+        return RouletteFilter(
+                minimumScore = getMinimumScore(),
+                showKind = getShowKind()
+        )
+    }
+
+    private fun getShowKind(): ShowKind {
+        return if (checkBoxMovies.isChecked && !checkBoxTvShows.isChecked) {
+            ShowKind.MOVIE
+        } else if (!checkBoxMovies.isChecked && checkBoxTvShows.isChecked) {
+            ShowKind.TV_SHOW
+        } else {
+            ShowKind.ANY_SHOW
+        }
+    }
+
+    private fun getMinimumScore(): Int {
+        val score = spinnerImdbRating.getItems<String>()[spinnerImdbRating.selectedIndex]
+        val replace = score.replace(">", "")
+        return if (replace.toIntOrNull() != null) {
+            replace.toInt()
+        } else {
+            0
+        }
+    }
+
+    private fun displayShow(show: Show) {
+        Picasso.with(this).load(show.posterUrl).into(imageViewPoster)
+        textViewDescription.text = show.overview
+        textViewImdbRating.text = getString(R.string.roulette_result_imdb_rating, show.imdbRating)
+        textViewTitle.text = show.title
+        textViewReleaseYear.text = show.releaseYear.toString()
+        groupResult.showGroup()
+        buttonWatch.show()
+
+        if (show.seasonCount != null) {
+            textViewSeasonsCount.text = getString(R.string.roulette_result_seasons, show.seasonCount)
+            textViewSeasonsCount.show()
+        } else {
+            textViewSeasonsCount.text = ""
+            textViewSeasonsCount.hide()
+        }
+        if (show.netflixUrl != null) {
+            buttonWatch.setOnClickListener {
+                browse(show.netflixUrl)
+            }
+        } else {
+            buttonWatch.hide()
+        }
     }
 
     private fun setupImdbRatingSpinner() {

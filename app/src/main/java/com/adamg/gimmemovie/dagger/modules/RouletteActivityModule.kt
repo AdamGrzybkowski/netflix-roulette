@@ -1,6 +1,6 @@
 package com.adamg.gimmemovie.dagger.modules
 
-import com.adamg.gimmemovie.repository.RouletteRepository
+import com.adamg.gimmemovie.repository.ShowRepository
 import com.adamg.gimmemovie.view.roulette.RouletteViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -9,7 +9,7 @@ import dagger.Provides
 open class RouletteActivityModule {
 
     @Provides
-    fun provideSongsViewModelFactory(rouletteRepository: RouletteRepository): RouletteViewModelFactory {
-        return RouletteViewModelFactory(rouletteRepository)
+    fun provideSongsViewModelFactory(showRepository: ShowRepository): RouletteViewModelFactory {
+        return RouletteViewModelFactory(showRepository)
     }
 }

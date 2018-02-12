@@ -5,8 +5,11 @@ import android.content.Context
 import com.adamg.gimmemovie.BuildConfig
 import com.adamg.gimmemovie.dagger.scopes.PerApplication
 import com.adamg.gimmemovie.remote.NetflixRouletteApi
-import com.adamg.gimmemovie.repository.RouletteRepository
-import com.adamg.gimmemovie.repository.RouletteRepositoryImpl
+import com.adamg.gimmemovie.remote.ShowRemoteDataSource
+import com.adamg.gimmemovie.remote.ShowRemoteDataSourceImpl
+import com.adamg.gimmemovie.remote.mappers.ShowMapper
+import com.adamg.gimmemovie.repository.ShowRepository
+import com.adamg.gimmemovie.repository.ShowRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -26,8 +29,14 @@ open class ApplicationModule {
 
     @Provides
     @PerApplication
-    fun provideRouletteRepository(): RouletteRepository {
-        return RouletteRepositoryImpl()
+    fun provideShowRemoteDataSource(netflixRouletteApi: NetflixRouletteApi, showMapper: ShowMapper): ShowRemoteDataSource {
+        return ShowRemoteDataSourceImpl(netflixRouletteApi, showMapper)
+    }
+
+    @Provides
+    @PerApplication
+    fun provideShowRepository(showRemoteDataSource: ShowRemoteDataSource): ShowRepository {
+        return ShowRepositoryImpl(showRemoteDataSource)
     }
 
     @Provides

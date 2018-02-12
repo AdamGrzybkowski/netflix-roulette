@@ -11,13 +11,14 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
-        android:padding="16dp">
+        android:background="@drawable/gradient_background">
 
         <TextView
             android:id="@+id/textViewInitResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:text="@string/roulette_init_result_text"
             android:textAlignment="center"
             android:textSize="24sp"
@@ -41,6 +42,8 @@
             android:id="@+id/imageViewPoster"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="w,2:3"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,34 +55,40 @@
             style="@style/PurpleButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Watch"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/roulette_result_watch"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonMoreInfo"
             app:layout_constraintEnd_toStartOf="@+id/buttonMoreInfo"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"/>
+            app:layout_constraintTop_toTopOf="@+id/buttonMoreInfo"/>
 
         <Button
             android:id="@+id/buttonMoreInfo"
             style="@style/FlatButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="More info"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/roulette_result_more_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buttonWatch"/>
+            app:layout_constraintStart_toEndOf="@+id/buttonWatch"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            tools:text="more info"/>
 
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:text="Tab Hunter Confidential"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,10 +101,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="2010"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTitle"
             app:layout_constraintStart_toStartOf="@+id/textViewTitle"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
             tools:text="2010"/>
@@ -105,20 +113,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="IMDB: 7.8/10"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewReleaseYear"
             app:layout_constraintStart_toStartOf="@+id/textViewReleaseYear"
             app:layout_constraintTop_toBottomOf="@+id/textViewReleaseYear"
             tools:text="IMDB: 7.8/10"/>
 
         <TextView
+            android:id="@+id/textViewSeasonsCount"
+            android:layout_width="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/textViewImdbRating"
+            app:layout_constraintStart_toStartOf="@+id/textViewImdbRating"
+            app:layout_constraintTop_toBottomOf="@+id/textViewImdbRating"
+            tools:text="5 Seasons"/>
+
+        <TextView
             android:id="@+id/textViewDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:lines="4"
-            android:text="In the 1950s, Tab Hunter is America’s Boy Next Door. Nothing, it seems, can damage his skyrocketing career. Nothing, that is, except for the fact that Tab Hunter is secretly gay. Now, Tab Hunter’s secret is out. Ind ad asd a dad @string/appbar_scrolling_view_behavior dasadsd asdad a asd a da da "
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            app:constraint_referenced_ids="textViewTitle,buttonMoreInfo,textViewDescription,textViewReleaseYear,imageViewPoster,buttonWatch,textViewImdbRating"
+            app:constraint_referenced_ids="textViewTitle,textViewSeasonsCount,buttonMoreInfo,textViewDescription,textViewReleaseYear,imageViewPoster,textViewImdbRating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
