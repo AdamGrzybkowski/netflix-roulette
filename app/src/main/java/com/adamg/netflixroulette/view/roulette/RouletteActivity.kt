@@ -66,6 +66,9 @@ class RouletteActivity: BaseActivity() {
     }
 
     private fun handleError(errorMessage: String?) {
+        progressBarResult.hide()
+        buttonSpinRoulette.text = getString(R.string.roulette_button_spin_again)
+        textViewInitResult.text = getString(R.string.roulette_init_result_text)
         snackbar(constraintLayoutRouletteContainer, errorMessage ?: getString(R.string.unknown_error))
     }
 

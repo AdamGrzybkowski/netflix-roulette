@@ -8,6 +8,7 @@ data class ShowRemote(
         val overview: String,
         val runtime: Int,
         val availability: List<StreamSource>?,
+        val trailer: Trailer?,
         @Json(name = "content_type") val contentType: ContentType,
         @Json(name = "has_poster") val hasPoster: Boolean,
         @Json(name = "imdb_rating") val imdbRating: String,
